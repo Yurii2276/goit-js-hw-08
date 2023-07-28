@@ -19,13 +19,11 @@ refs.submitBtn.addEventListener('submit', handleSubmit);
  function emailProcessing(event) {
     const emailValue = event.target.value;
      saveToLocalStorage({ email: emailValue });
-     console.log(`Email: ${emailValue}`);
 };
 
 function messageProcessing(event) {
     const messageValue = event.target.value;
     saveToLocalStorage({ message: messageValue });
-  console.log(`Message: ${messageValue}`);
     };
 
     function saveToLocalStorage(data) {
@@ -40,10 +38,24 @@ function handleSubmit(event) {
       event.preventDefault();
 
       const formData = JSON.parse(localStorage.getItem(KEY_INPUT_FIELD));
-      console.log('Form data:', formData);
 
       localStorage.removeItem(KEY_INPUT_FIELD);
 
       refs.emailInput.value = '';
       refs.messageInput.value = '';
+};
+
+document.addEventListener('DOMContentLoaded', contentLoader);
+
+function contentLoader() {
+  const formData = JSON.parse(localStorage.getItem(KEY_INPUT_FIELD));
+
+  if (formData) {
+    if (formData.email) {
+      refs.emailInput.value = formData.email;
+    }
+    if (formData.message) {
+      refs.messageInput.value = formData.message;
+    }
+  };
 };
