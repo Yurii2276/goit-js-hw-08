@@ -38,18 +38,21 @@ function handleSubmit(event) {
       event.preventDefault();
 
       const formData = JSON.parse(localStorage.getItem(KEY_INPUT_FIELD));
+      
+      console.log('Форма перед відправкою:', formData);
 
       localStorage.removeItem(KEY_INPUT_FIELD);
 
       refs.emailInput.value = '';
       refs.messageInput.value = '';
+
 };
 
 document.addEventListener('DOMContentLoaded', contentLoader);
 
 function contentLoader() {
   const formData = JSON.parse(localStorage.getItem(KEY_INPUT_FIELD));
-
+  
   if (formData) {
     if (formData.email) {
       refs.emailInput.value = formData.email;
